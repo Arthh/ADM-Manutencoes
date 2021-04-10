@@ -5,6 +5,7 @@ export const TittleMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 
   > h2 {
     color: ${props => props.theme.colors.info};
@@ -22,8 +23,9 @@ export const TittleMenu = styled.div`
 `;
 
 export const Container = styled.div`
+  flex-wrap: wrap;
   height: 40vh;
-
+  width: 80vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,16 +36,11 @@ export const BoxOptions = styled(Link)`
   width: 25%;
   height: 125px;
   text-decoration: none;
-
-  background-color: ${props => props.theme.colors.tertiary};
+  margin-left: 20px;
   color: ${props => props.theme.colors.info};
 
   border-radius: 10px;
   border: 1px solid ${props => props.theme.colors.info};
-
-  &:nth-child(2) {
-    margin-left: 30px;
-  }
 
   justify-content: center;
   align-items: center;

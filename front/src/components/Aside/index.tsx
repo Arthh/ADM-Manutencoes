@@ -23,8 +23,10 @@ const Aside: React.FC = () => {
   return (
     <Container>
       <Header>
+        <MenuItemLink href="/menu">
         <LogoImg src={logoAsideImg} alt="ADM" />
         <Tittle>A.D.M</Tittle>
+        </MenuItemLink>
       </Header>
 
       <MenuContainer>
@@ -33,14 +35,9 @@ const Aside: React.FC = () => {
           Cadastros
         </MenuItemLink>
 
-        <MenuItemLink href="/">
+        <MenuItemLink href="/consultas/menu">
           <MdBookmark />
           Consultas
-        </MenuItemLink>
-
-        <MenuItemLink href="/">
-          <MdDashboard />
-          Temp Template
         </MenuItemLink>
 
         <MenuItemButton onClick={signOut}>

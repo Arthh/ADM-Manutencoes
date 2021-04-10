@@ -1,24 +1,26 @@
 import styled from 'styled-components';
+import SelectOptions from '../../../components/SelectOptions';
 
 export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-`;
+  `;
 
 export const Form = styled.form`
-  display: flex;
-  width: auto;
-
+  width: 300px;
   height: auto;
 
-  padding: 30px;
+  text-align: center;
+  margin: 50px 0;
 
-  border-radius: 10px;
 
-  background-color: ${props => props.theme.colors.white};
+  h3 {
+    margin-top: 5px;
+    font-weight: normal;
+  }
+
 `;
 
 export const FormTitle = styled.div`
@@ -26,8 +28,6 @@ export const FormTitle = styled.div`
   justify-content: center;
 
   > h1 {
-    margin-bottom: 40px;
-
     color: ${props => props.theme.colors.info};
 
     &:after {
@@ -39,7 +39,12 @@ export const FormTitle = styled.div`
   }
 `;
 
-export const FormInputContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 3fr);
-`;
+export const Select = styled(SelectOptions)`
+  width: 100%;
+
+
+
+  margin: 7px 0;
+  color: ${props => props.theme.colors.info};
+  
+`

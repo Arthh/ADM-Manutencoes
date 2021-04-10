@@ -5,6 +5,7 @@ export const TittleMenu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 
   > h2 {
     color: ${props => props.theme.colors.info};
@@ -22,6 +23,7 @@ export const TittleMenu = styled.div`
 `;
 
 export const Container = styled.div`
+  flex-wrap: wrap;
   height: 40vh;
   width: 80vw;
   display: flex;
