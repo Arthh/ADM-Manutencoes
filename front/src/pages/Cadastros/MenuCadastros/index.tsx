@@ -7,7 +7,6 @@ const menuOptions = [
   { name: 'Maquinário', value: 2, link: '/cadastros/maquinario' },
   { name: 'Prestador De Serviço', value: 3, link: '/cadastros/prestservicos' },
   { name: 'Ordem De Manutenção', value: 4, link: '/cadastros/ordmanutencao' },
-  { name: 'Compra De Material', value: 5, link: '/cadastros/ordcompmaterial' },
 ];
 
 const MenuCadastros: React.FC = () => {

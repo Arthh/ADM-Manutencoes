@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 
 import Layout from '../components/Layout';
 
@@ -9,33 +9,44 @@ import MenuCadastros from '../pages/Cadastros/MenuCadastros';
 import CadastroSetores from '../pages/Cadastros/Setores';
 import CadastroMaquinario from '../pages/Cadastros/Maquinario';
 import CadastroPrestServicos from '../pages/Cadastros/PrestadorDeServiço';
-import OrdemDeManutencao from '../pages/Cadastros/OrdemDeManutencao';
-import OrdemCompraMaterial from '../pages/Cadastros/OrdemCompraMaterial';
+import CadastroOrdemDeManutencao from '../pages/Cadastros/OrdemDeManutencao';
+import CadastroOrdemCompraMaterial from '../pages/Cadastros/OrdemCompraMaterial';
 
 // CONSULTAS
 import MenuConsultas from '../pages/Consultas/MenuConsultas';
 import ConsultaSetores from '../pages/Consultas/Setor';
+import ConsultaMaquinario from '../pages/Consultas/Maquinario';
+import ConsultaPrestServicos from '../pages/Consultas/PrestadorServico';
+import ConsultaOrdemManutencao from '../pages/Consultas/OrdemManutencao';
 
-// import PrivateRoutes from './PrivateRoutes';
-import Login from '../pages/Login';
+//EDITAR
+import EditarSetor from '../pages/Editar/Setores';
+
+import PrivateRoutes from './PrivateRoutes';
 
 const AuthRoutes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={Login} />
+    <PrivateRoutes path="/" exact component={() => <Redirect to="/cadastros/menu" />} />
     <Layout>
       {/* //VOLTAR ESSAS ROTAS PRA PRIVATEROUTES */}
 
       {/* CADASTROS */}
-      <Route path="/cadastros/menu" exact component={MenuCadastros} />
-      <Route path="/cadastros/setores" exact  component={CadastroSetores} />
-      <Route path="/cadastros/maquinario" exact  component={CadastroMaquinario} />
-      <Route path="/cadastros/prestservicos" exact  component={CadastroPrestServicos} />
-      <Route path="/cadastros/ordmanutencao" exact component={OrdemDeManutencao} />
-      <Route path="/cadastros/ordcompmaterial" exact component={OrdemCompraMaterial} />
+      <PrivateRoutes path="/cadastros/menu" exact component={MenuCadastros} />
+      <PrivateRoutes path="/cadastros/setores" exact  component={CadastroSetores} />
+      <PrivateRoutes path="/cadastros/maquinario" exact  component={CadastroMaquinario} />
+      <PrivateRoutes path="/cadastros/prestservicos" exact  component={CadastroPrestServicos} />
+      <PrivateRoutes path="/cadastros/ordmanutencao" exact component={CadastroOrdemDeManutencao} />
+      <PrivateRoutes path="/cadastros/ordcompmaterial" exact component={CadastroOrdemCompraMaterial} />
 
       {/* CONSULTAS */}
-      <Route path="/consultas/menu" exact component={MenuConsultas} />
-      <Route path="/consultas/setores" exact component={ConsultaSetores} />
+      <PrivateRoutes path="/consultas/menu" exact component={MenuConsultas} />
+      <PrivateRoutes path="/consultas/setores" exact component={ConsultaSetores} />
+      <PrivateRoutes path="/consultas/maquinario" exact component={ConsultaMaquinario} />
+      <PrivateRoutes path="/consultas/prestservicos" exact component={ConsultaPrestServicos} />
+      <PrivateRoutes path="/consultas/ordmanutencao" exact component={ConsultaOrdemManutencao} />
+
+      {/* EDITAR */}
+      <PrivateRoutes path="/editar/setor" exact component={ (props: any) => EditarSetor({...props}) } />
 
     </Layout>
   </Switch>

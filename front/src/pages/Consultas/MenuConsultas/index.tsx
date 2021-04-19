@@ -7,7 +7,6 @@ const menuOptions = [
   { name: 'Maquinário', value: 2, link: '/consultas/maquinario' },
   { name: 'Prestador De Serviço', value: 3, link: '/consultas/prestservicos' },
   { name: 'Ordem De Manutenção', value: 4, link: '/consultas/ordmanutencao' },
-  { name: 'Compra De Material', value: 5, link: '/consultas/ordcompmaterial' },
 ];
 
 const MenuConsultas: React.FC = () => {

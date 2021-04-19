@@ -2,7 +2,9 @@ import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
+
+import history from './history';
 
 import Routes from './routes';
 
@@ -19,7 +21,9 @@ const App: React.FC = () => {
         <GlobalStyles />
 
         <AuthProvider>
+          <Router history={history}>
           <Routes />
+          </Router>
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
