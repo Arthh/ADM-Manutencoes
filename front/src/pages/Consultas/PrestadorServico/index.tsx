@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container, FormTitle, TableItens } from './styles';
+import api from '../../../services/api';
+
+import { useHistory } from "react-router-dom";
 
 import { TiDelete } from 'react-icons/ti';
 import { BsPencil } from 'react-icons/bs';
 
-const prestadoresOptions = [
-  {name: 'System Informatica', telefone: '(11)11111-1111', representante:'Caio', id: 1},
-  {name: 'Hidro LTDA', telefone: '(22)22222-2222', representante:'Marcelo', id: 2},
-  {name: 'Aguia Segurança', telefone: '(33)33333-3333', representante:'Matheus', id: 3},
-  {name: 'System Informatica', telefone: '(44)44444-4444', representante:'Jorge', id: 4},
-]
+const PrestadoresServico: React.FC = () => {
+  let history = useHistory();
+  const [prestadores, setPrestadores] = useState([]);
 
-const Setores: React.FC = () => {
+  useEffect(() => {
+    async function loadPrestadoresServico() {
+      try{
+        const response = await api.get('/index-pservico');
+        setPrestadores(response.data);
+        }catch(err){
+          alert('Erro ao recuperar prestadores de serviço!');
+        } 
+      };
+
+      loadPrestadoresServico();
+  },[])
+
+  const editHandler = (prestador: any) => {
+    history.push('/editar/prestservico', prestador);
+  }
+
+  const deleteHandler = async(prestadorId: number) => {
+    try {
+      await api.delete(`/delete-pservico/${prestadorId}`);
+      const aux = prestadores.filter((pestador:any) => pestador.id !== prestadorId);
+      setPrestadores(aux);
+      alert('Removido com sucesso!');
+    }catch(err){
+      alert('Erro ao remover')
+    }
+  }
+
   return (
     <Container>
       <FormTitle>
@@ -30,13 +57,17 @@ const Setores: React.FC = () => {
         </thead>
 
         <tbody >
-          {prestadoresOptions.map(setor => (
-            <tr key={setor.id}>
-              <td>{setor.id}</td>
-              <td>{setor.name}</td>
-              <td>{setor.telefone}</td>
-              <td>{setor.representante}</td>
-              <th> <TiDelete/>  <BsPencil /></th>
+          {prestadores.map((prestador:any) => (
+            <tr key={prestador.id}>
+              <td>{prestador.id}</td>
+              <td>{prestador.nome}</td>
+              <td>{prestador.telefone}</td>
+              <td>{prestador.representante}</td>
+              <th> 
+              <TiDelete onClick={() => deleteHandler(prestador.id)}/> 
+              <BsPencil style={{marginLeft:'10px'}} onClick={() => editHandler(prestador)}/>
+              </th>
+            
             </tr>
           ))}
          
@@ -46,4 +77,4 @@ const Setores: React.FC = () => {
   );
 };
 
-export default Setores;
+export default PrestadoresServico;

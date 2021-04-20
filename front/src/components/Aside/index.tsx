@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
 
-import { MdDashboard, MdBookmark, MdExitToApp } from 'react-icons/md';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { MdBookmark, MdExitToApp } from 'react-icons/md';
+import { AiOutlinePlusCircle, AiOutlineUserAdd } from 'react-icons/ai';
+
 
 import logoAsideImg from '../../assets/logoAside.svg';
 import { useAuth } from '../../hooks/AuthContext';
@@ -23,7 +24,7 @@ const Aside: React.FC = () => {
   return (
     <Container>
       <Header>
-        <MenuItemLink href="/menu">
+        <MenuItemLink href="/cadastros/menu">
         <LogoImg src={logoAsideImg} alt="ADM" />
         <Tittle>A.D.M</Tittle>
         </MenuItemLink>
@@ -39,6 +40,12 @@ const Aside: React.FC = () => {
           <MdBookmark />
           Consultas
         </MenuItemLink>
+
+        <MenuItemLink href="/cadastro/user">
+          <AiOutlineUserAdd />
+          Criar Usuario
+        </MenuItemLink>
+        
 
         <MenuItemButton onClick={signOut}>
           <MdExitToApp />

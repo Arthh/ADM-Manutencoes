@@ -54,9 +54,6 @@ const AuthProvider: React.FC = ({ children }) => {
     }catch(err){
       return alert('Usuário não existe');
     }
-
-  
-
   };
 
   const userLogged = useCallback(() => {

@@ -51,7 +51,7 @@ class SetorController {
   };
 
   async delete(req,res){
-    const { id } = req.body;
+    const { id } = req.params;
     try {
       const setor = await pool.query(
       "DELETE FROM setores WHERE id = $1",
@@ -66,3 +66,5 @@ class SetorController {
 }
 
 export default new SetorController; 
+
+             

@@ -4,7 +4,7 @@ class OrdManutencaoController{
   async index(req, res){
     try {
       const allOrdManutencao = await pool.query(
-        "SELECT * FROM ordemmanutencao"
+       "SELECT ordemmanutencao.id, maquinas.nome as maquina_nome, prestadoresservico.nome as prestador_nome, ordemmanutencao.descricao, ordemmanutencao.responsavel, ordemmanutencao.preco, ordemmanutencao.data  FROM ordemmanutencao, maquinas, prestadoresservico WHERE ordemmanutencao.maquina_id = maquinas.id AND ordemmanutencao.prestador_id = prestadoresservico.id"
       );
       return res.json(allOrdManutencao.rows);
     }catch(err){
@@ -13,11 +13,11 @@ class OrdManutencaoController{
   };
   
   async store(req, res){
-    let { maquina_id, prestador_id, descricao, responsavel, preco, status, data } = req.body;
+    let { maquina_id, prestador_id, descricao, responsavel, preco, data } = req.body;
     try {
       const newOrdManutencao = await pool.query(
-        "INSERT INTO ordemmanutencao (maquina_id, prestador_id, descricao, responsavel, preco, status, data) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-         [maquina_id, prestador_id, descricao, responsavel, preco, status, data]
+        "INSERT INTO ordemmanutencao (maquina_id, prestador_id, descricao, responsavel, preco, data) VALUES ($1, $2, $3, $4, $5, $6)",
+         [maquina_id, prestador_id, descricao, responsavel, preco, data]
       );
       return res.send('Cadastrado com sucesso!');
     }catch(err) {
@@ -52,7 +52,7 @@ class OrdManutencaoController{
   };
 
   async delete(req,res){
-    const { id } = req.body;
+    const { id } = req.params;
     try {
       const ordManu = await pool.query(
       "DELETE FROM ordemmanutencao WHERE id = $1",

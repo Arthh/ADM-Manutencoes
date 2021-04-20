@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../../services/api';
 
 import { Container, FormTitle, TableItens } from './styles';
 
+import formatCurrency from '../../../utils/formatCurrency';
+import formatDate from '../../../utils/formatDate';
+
 import { TiDelete } from 'react-icons/ti';
-import { BsPencil } from 'react-icons/bs';
+// import { BsPencil } from 'react-icons/bs';
 
-const ordemOptions = [
-  {maquina: 'Impressora', prestador: 'System Informatica', descricao: 'Impressora parou de funcionar, estava travada', responsavel: 'João Pedro', preco: 'R&80,00', status: 'Em Andamento', data: '22/03/21', id: 1},
-  {maquina: 'Impressora', prestador: 'Eletro Manutenções', descricao: 'LED da televisão queimou', responsavel: 'Gabriel', preco: 'R&230,10', status: 'Finalizado', data: '21/03/21', id: 2},
-  {maquina: 'Bomba D´agua', prestador: 'Hidro LTDA', descricao: 'Gatilho quebrado', responsavel: 'Marcelo', preco: 'R&45,50', status: 'Não Iniciado', data: '24/03/21', id: 3},
-]
 
-const Setores: React.FC = () => {
+const OrdemManutencao: React.FC = () => {
+  const [ordensManutencao, setOrdensManutencao] = useState([]);
+
+  useEffect(() => {
+    async function loadOrdensManutencao() {
+      try{
+        const response = await api.get('/index-ordman');
+        console.log(response.data);
+        setOrdensManutencao(response.data);
+        }catch(err){
+          alert('Erro ao recuperar maquinas!');
+        } 
+      };
+
+      loadOrdensManutencao();
+  },[]);
+
+
+const deleteHandler = async(ordemId: number) => {
+  try {
+    await api.delete(`/delete-ordman/${ordemId}`);
+    const aux = ordensManutencao.filter((ordem:any) => ordem.id !== ordemId);
+    setOrdensManutencao(aux);
+    alert('Removido com sucesso!');
+  }catch(err){
+    alert('Erro ao remover')
+  }
+}
+
   return (
     <Container>
       <FormTitle>
@@ -26,24 +53,24 @@ const Setores: React.FC = () => {
             <th>Descrição</th>
             <th>Responsavel</th>
             <th>Preço</th>
-            <th>Status</th>
             <th>Data</th>
             <th>Opções</th>
           </tr>
         </thead>
-
         <tbody >
-          {ordemOptions.map(setor => (
-            <tr key={setor.id}>
-              <td>{setor.id}</td>
-              <td>{setor.maquina}</td>
-              <td>{setor.prestador}</td>
-              <td>{setor.descricao}</td>
-              <td>{setor.responsavel}</td>
-              <td>{setor.preco}</td>
-              <td>{setor.status}</td>
-              <td>{setor.data}</td>
-              <th> <TiDelete/>  <BsPencil /></th>
+          {ordensManutencao.map((ordem: any) => (
+            <tr key={ordem.id}>
+              <td>{ordem.id}</td>
+              <td>{ordem.maquina_nome}</td>
+              <td>{ordem.prestador_nome}</td>
+              <td>{ordem.descricao}</td>
+              <td>{ordem.responsavel}</td>
+              <td>{formatCurrency(ordem.preco)}</td>
+              <td>{formatDate(ordem.data)}</td>
+              <th> 
+              <TiDelete onClick={() => deleteHandler(ordem.id)}/> 
+                {/* <BsPencil /> */}
+              </th>
             </tr>
           ))}
          
@@ -53,4 +80,4 @@ const Setores: React.FC = () => {
   );
 };
 
-export default Setores;
+export default OrdemManutencao;

@@ -52,7 +52,7 @@ class PServicosController {
   };
 
   async delete(req,res){
-    const { id } = req.body;
+    const { id } = req.params;
     try {
       const pServico = await pool.query(
       "DELETE FROM prestadoresservico WHERE id = $1",

@@ -5,7 +5,7 @@ class MaquinasController
   async index(req, res){
     try {
       const allMaquinas = await pool.query(
-        "SELECT * FROM maquinas"
+        "SELECT maquinas.id,maquinas.nome,setores.id as setor_id, setores.nome as setor_nome FROM maquinas, setores WHERE maquinas.setor_id = setores.id"
       );
       return res.json(allMaquinas.rows);
     }catch(err){
@@ -39,11 +39,11 @@ class MaquinasController
   };
 
   async update(req, res){
-    const { id , name } = req.body;
+    const { id , name, setor_id } = req.body;
     try {
       const setor = await pool.query(
-      "UPDATE maquinas SET nome = $1 WHERE id = $2",
-      [name,id]
+      "UPDATE maquinas SET nome = $1, setor_id = $2 WHERE id = $3",
+      [name, setor_id, id]
       );
       return res.send('Atualizado com sucesso!');
     }catch(err){
@@ -52,7 +52,7 @@ class MaquinasController
   };
 
   async delete(req,res){
-    const { id } = req.body;
+    const { id } = req.params;
     try {
       const setor = await pool.query(
       "DELETE FROM maquinas WHERE id = $1",

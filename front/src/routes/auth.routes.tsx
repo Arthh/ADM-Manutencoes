@@ -10,7 +10,7 @@ import CadastroSetores from '../pages/Cadastros/Setores';
 import CadastroMaquinario from '../pages/Cadastros/Maquinario';
 import CadastroPrestServicos from '../pages/Cadastros/PrestadorDeServiço';
 import CadastroOrdemDeManutencao from '../pages/Cadastros/OrdemDeManutencao';
-import CadastroOrdemCompraMaterial from '../pages/Cadastros/OrdemCompraMaterial';
+import CadastroUsuario from '../pages/Cadastros/Usuarios';
 
 // CONSULTAS
 import MenuConsultas from '../pages/Consultas/MenuConsultas';
@@ -21,6 +21,8 @@ import ConsultaOrdemManutencao from '../pages/Consultas/OrdemManutencao';
 
 //EDITAR
 import EditarSetor from '../pages/Editar/Setores';
+import EditarMaquina from '../pages/Editar/Maquinas';
+import EditarPrestadorServico from '../pages/Editar/PrestadorServico';
 
 import PrivateRoutes from './PrivateRoutes';
 
@@ -36,7 +38,7 @@ const AuthRoutes: React.FC = () => (
       <PrivateRoutes path="/cadastros/maquinario" exact  component={CadastroMaquinario} />
       <PrivateRoutes path="/cadastros/prestservicos" exact  component={CadastroPrestServicos} />
       <PrivateRoutes path="/cadastros/ordmanutencao" exact component={CadastroOrdemDeManutencao} />
-      <PrivateRoutes path="/cadastros/ordcompmaterial" exact component={CadastroOrdemCompraMaterial} />
+      <PrivateRoutes path="/cadastro/user" exact component={CadastroUsuario} />
 
       {/* CONSULTAS */}
       <PrivateRoutes path="/consultas/menu" exact component={MenuConsultas} />
@@ -47,7 +49,9 @@ const AuthRoutes: React.FC = () => (
 
       {/* EDITAR */}
       <PrivateRoutes path="/editar/setor" exact component={ (props: any) => EditarSetor({...props}) } />
-
+      <PrivateRoutes path="/editar/maquina" exact component={ (props: any) => EditarMaquina({...props}) } />
+      <PrivateRoutes path="/editar/prestservico" exact component={ (props: any) => EditarPrestadorServico({...props}) } />
+    
     </Layout>
   </Switch>
 );

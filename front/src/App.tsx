@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
         <AuthProvider>
           <Router history={history}>
-          <Routes />
+            <Routes />
           </Router>
         </AuthProvider>
       </ThemeProvider>

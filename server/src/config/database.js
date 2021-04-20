@@ -3,7 +3,7 @@ import { Pool } from "pg";
 const pool = new Pool({
   user: 'postgres',
   password: 'docker',
-  database: 'adamanutencoes',
+  database: 'admmanutencoes',
   host: 'localhost',
   port: 5432,
   define: {

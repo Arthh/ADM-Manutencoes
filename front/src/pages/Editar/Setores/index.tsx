@@ -1,22 +1,29 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import TextArea from '../../../components/TextArea';
-import Setores from '../../Cadastros/Setores';
+import api from '../../../services/api';
 
 import { Container, Form, FormTitle } from './styles';
 
 
 const EditarSetor: React.FC<any> = (props) => {
-    const [setor, setSetor] = useState(props.location.state.setor);
-
-  const handleSubmite = useCallback(
-    async event => {
+    const [setor, ] = useState(props.location.state);
+  
+    const handleSubmite = async (event: any) => {
       event.preventDefault();
-      console.log('alou');
-    },
-    [],
-  );
+      const setorName = event.target.name.value
+      try {
+        await api.put('/update-setor', {
+          id: setor.id,
+          name: setorName
+        });
+
+      }catch(err){
+        alert('Nome já existente!');
+      }
+
+      alert('Atualizado com sucesso!');
+    };
 
   return (
     <Container>
@@ -25,10 +32,7 @@ const EditarSetor: React.FC<any> = (props) => {
       </FormTitle>
       <Form onSubmit={handleSubmite}>
           <h3 style={{ color: 'black' }}>Nome</h3>
-          <Input type="text"  defaultValue={setor.name} required />
-          <h3 style={{ color: 'black'}}>Descrição</h3>
-          <TextArea  defaultValue={setor.descricao} required />
-      
+          <Input name="name" type="text"  defaultValue={setor.nome} required />
         <Button style={{width: '100px'}} type="submit">Atualizar</Button>
       </Form>
     </Container>

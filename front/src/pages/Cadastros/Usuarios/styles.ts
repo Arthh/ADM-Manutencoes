@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import SelectOptions from '../../../components/SelectOptions';
 
 export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
+  
   `;
 
 export const Form = styled.form`
@@ -20,7 +20,6 @@ export const Form = styled.form`
     margin-top: 5px;
     font-weight: normal;
   }
-
 `;
 
 export const FormTitle = styled.div`
@@ -39,12 +38,3 @@ export const FormTitle = styled.div`
   }
 `;
 
-export const Select = styled(SelectOptions)`
-  width: 100%;
-
-
-
-  margin: 7px 0;
-  color: ${props => props.theme.colors.info};
-  
-`
